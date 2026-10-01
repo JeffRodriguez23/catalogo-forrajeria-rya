@@ -1411,14 +1411,68 @@ function actualizarPantalla() {
    NAVEGACIÓN
 ========================================================= */
 
+function crearEstadoNavegacion() {
+
+    return {
+        vista: vistaActual,
+        categoria: categoriaSeleccionada,
+        marca: marcaSeleccionada
+    };
+}
+
+
+function registrarEstadoNavegacion() {
+
+    history.pushState(
+        crearEstadoNavegacion(),
+        ""
+    );
+}
+
+
+function restaurarEstadoNavegacion(estadoHistorial) {
+
+    const estado =
+        estadoHistorial ?? {
+            vista: "inicio",
+            categoria: "",
+            marca: ""
+        };
+
+    vistaActual =
+        estado.vista ?? "inicio";
+
+    categoriaSeleccionada =
+        estado.categoria ?? "";
+
+    marcaSeleccionada =
+        estado.marca ?? "";
+
+    buscador.value = "";
+
+    /*
+     * Si regresamos mediante Atrás/Adelante
+     * a una vista de productos, reconstruimos
+     * también los filtros correspondientes
+     * a esa marca.
+     */
+    if (vistaActual === "productos") {
+
+        prepararFiltros();
+    }
+
+    actualizarPantalla();
+}
+
+
 function volver() {
 
     const hayBusqueda =
         normalizar(buscador.value) !== "";
 
     /*
-     * Si estamos viendo resultados de búsqueda,
-     * volver nos lleva al inicio.
+     * Por ahora la búsqueda no forma parte
+     * del historial de categorías y marcas.
      */
     if (hayBusqueda) {
 
@@ -1427,32 +1481,12 @@ function volver() {
         return;
     }
 
-
     /*
-     * PRODUCTOS
-     * ↓
-     * MARCAS DE LA CATEGORÍA ACTUAL
+     * Utilizamos el historial real del navegador.
      */
-    if (vistaActual === "productos") {
-
-        seleccionarCategoria(
-            categoriaSeleccionada
-        );
-
-        return;
-    }
-
-
-    /*
-     * MARCAS
-     * ↓
-     * INICIO / CATEGORÍAS
-     */
-    if (vistaActual === "marcas") {
-
-        irInicio();
-    }
+    history.back();
 }
+
 
 function actualizarBotonVolver() {
 
@@ -1464,6 +1498,7 @@ function actualizarBotonVolver() {
         !hayBusqueda;
 }
 
+
 function irInicio() {
 
     vistaActual = "inicio";
@@ -1472,6 +1507,13 @@ function irInicio() {
     marcaSeleccionada = "";
 
     buscador.value = "";
+
+    /*
+     * Registramos Inicio como una nueva
+     * entrada del historial cuando se llega
+     * mediante la interfaz de la aplicación.
+     */
+    registrarEstadoNavegacion();
 
     actualizarPantalla();
 }
@@ -1489,6 +1531,12 @@ function seleccionarCategoria(
     marcaSeleccionada = "";
 
     buscador.value = "";
+
+    /*
+     * Registramos la categoría en el
+     * historial real del navegador.
+     */
+    registrarEstadoNavegacion();
 
     actualizarPantalla();
 }
@@ -1508,12 +1556,43 @@ function seleccionarMarca(
 
     prepararFiltros();
 
+    /*
+     * Registramos la vista de productos
+     * de esta marca en el historial.
+     */
+    registrarEstadoNavegacion();
+
     actualizarPantalla();
 }
+
 
 botonVolver.addEventListener(
     "click",
     volver
+);
+
+
+/*
+ * =========================================================
+ * HISTORIAL NATIVO DEL NAVEGADOR
+ * =========================================================
+ *
+ * Se ejecuta cuando el usuario utiliza:
+ *
+ * - Atrás del celular
+ * - Gesto Atrás del celular
+ * - Atrás del navegador
+ * - Adelante del navegador
+ * - Gestos equivalentes
+ */
+window.addEventListener(
+    "popstate",
+    (evento) => {
+
+        restaurarEstadoNavegacion(
+            evento.state
+        );
+    }
 );
 
 /* =========================================================
@@ -1593,6 +1672,15 @@ async function cargarProductos() {
         productos = datos;
 
         mensajeError.hidden = true;
+
+        /*
+         * Registramos el estado inicial de la aplicación
+         * sin crear una entrada adicional en el historial.
+         */
+        history.replaceState(
+            crearEstadoNavegacion(),
+            ""
+        );
 
         actualizarPantalla();
 
