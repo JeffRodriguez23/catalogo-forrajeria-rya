@@ -1,0 +1,2032 @@
+:root {
+  --azul: #173b63;
+  --azul-claro: #edf3fa;
+  --texto: #243447;
+  --borde: #dce4ed;
+  --blanco: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: var(--texto);
+
+  /* Fondo general del catálogo */
+  background:
+    radial-gradient(circle at 15% 20%,
+      rgba(73, 184, 214, 0.08) 0,
+      rgba(73, 184, 214, 0.08) 90px,
+      transparent 220px),
+    radial-gradient(circle at 85% 55%,
+      rgba(23, 59, 99, 0.06) 0,
+      rgba(23, 59, 99, 0.06) 100px,
+      transparent 250px),
+    linear-gradient(180deg,
+      #ffffff 0%,
+      #f4fbfd 45%,
+      #eef8fb 100%);
+
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+.contenedor {
+  width: min(1100px, 92%);
+  margin-inline: auto;
+}
+
+/* ========================================
+   HEADER BASE
+======================================== */
+
+.encabezado {
+  padding: 28px 0;
+  background: var(--azul);
+  color: var(--blanco);
+}
+
+.encabezado h1 {
+  margin: 8px 0;
+}
+
+.identidad {
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* ========================================
+   BUSCADOR
+======================================== */
+
+.busqueda {
+  display: grid;
+  gap: 8px;
+  margin: 28px 0 20px;
+}
+
+.busqueda label {
+  font-weight: 700;
+}
+
+.busqueda input {
+  width: 100%;
+  min-height: 48px;
+
+  padding: 13px 15px;
+
+  border: 1px solid rgba(23, 59, 99, 0.22);
+  border-radius: 12px;
+
+  background: #ffffff;
+
+  box-shadow: 0 4px 14px rgba(23, 59, 99, 0.07);
+
+  font: inherit;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.busqueda input:focus {
+  border-color: var(--azul);
+
+  box-shadow:
+    0 0 0 3px rgba(23, 59, 99, 0.10),
+    0 5px 16px rgba(23, 59, 99, 0.08);
+}
+
+/* ========================================
+   RUTA / BREADCRUMB
+======================================== */
+
+.ruta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.ruta button {
+  border: 0;
+  padding: 6px 0;
+  background: transparent;
+  color: var(--azul);
+  text-decoration: underline;
+}
+
+.ruta span {
+  color: var(--texto);
+}
+
+/* ========================================
+   BOTONES / ACCESIBILIDAD
+======================================== */
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+button:focus-visible,
+input:focus-visible {
+  outline: 3px solid #75a9e5;
+  outline-offset: 3px;
+}
+
+section {
+  margin-bottom: 28px;
+}
+
+/* ========================================
+   CUADRÍCULAS DE NAVEGACIÓN
+======================================== */
+
+.cuadricula-categorias,
+.cuadricula-marcas {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.cuadricula-marcas .tarjeta-navegacion {
+  position: relative;
+
+  min-height: 105px;
+  padding: 16px 12px;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(23, 59, 99, 0.16);
+  border-radius: 16px;
+
+  background:
+    linear-gradient(145deg,
+      rgba(255, 255, 255, 0.98),
+      rgba(237, 247, 251, 0.96));
+
+  color: var(--azul);
+
+  box-shadow: 0 5px 16px rgba(23, 59, 99, 0.08);
+
+  font-weight: 700;
+  text-align: center;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.cuadricula-marcas .tarjeta-navegacion::before {
+  content: "";
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 5px;
+
+  background: linear-gradient(90deg,
+      #0aa7c7,
+      #1767b1);
+}
+
+.cuadricula-marcas .tarjeta-navegacion:hover {
+  transform: translateY(-4px);
+
+  border-color: rgba(23, 59, 99, 0.35);
+
+  box-shadow: 0 10px 24px rgba(23, 59, 99, 0.13);
+}
+
+/* ========================================
+   TARJETAS DE NAVEGACIÓN
+   Se mantiene para las MARCAS
+======================================== */
+
+.tarjeta-navegacion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 150px;
+  gap: 12px;
+  padding: 20px 12px;
+  border: 1px solid var(--borde);
+  border-radius: 14px;
+  background: var(--azul-claro);
+  color: var(--azul);
+  text-align: center;
+  font-weight: 700;
+}
+
+.tarjeta-navegacion:hover {
+  border-color: var(--azul);
+  background: #e1edfa;
+}
+
+.icono-categoria {
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+/* ========================================
+   PRODUCTOS
+======================================== */
+
+.productos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+
+}
+
+.tarjeta-producto {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: visible;
+  padding: 12px;
+  border: 1px solid rgba(23, 59, 99, 0.18);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow:
+    0 6px 16px rgba(23, 59, 99, 0.09),
+    0 14px 30px rgba(23, 59, 99, 0.06);
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    border-color 0.22s ease;
+}
+
+/* La card con el selector de WhatsApp abierto
+   queda por encima de las demás cards. */
+
+.tarjeta-producto:has(.bloque-consulta.activo) {
+  z-index: 100;
+}
+
+.tarjeta-producto:hover {
+  transform: translateY(-5px);
+  border-color: rgba(23, 59, 99, 0.38);
+  box-shadow:
+    0 10px 24px rgba(23, 59, 99, 0.14),
+    0 18px 36px rgba(23, 59, 99, 0.09);
+}
+
+.marca-producto {
+  align-self: flex-start;
+  max-width: 100%;
+  margin-bottom: 6px;
+  padding: 5px 9px;
+  overflow: hidden;
+  border-radius: 7px;
+  background: linear-gradient(135deg, #0aa7c7, #1767b1);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  line-height: 1.1;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.contenedor-imagen-producto {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 180px;
+  margin-bottom: 8px;
+}
+
+.tarjeta-producto .imagen-producto {
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.informacion-producto {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.nombre-producto {
+  margin: 5px 0 9px;
+  color: var(--azul);
+  font-size: 0.95rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.bloque-info-producto {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+  font-size: 0.8rem;
+}
+
+.etiqueta-info {
+  flex: 0 0 auto;
+  color: #52677d;
+  font-weight: 600;
+}
+
+.valor-info,
+.valor-sabor {
+  min-width: 0;
+  color: var(--texto);
+  font-weight: 700;
+  text-align: right;
+  overflow-wrap: anywhere;
+}
+
+.valor-proteina {
+  flex: 0 0 auto;
+  padding: 3px 7px;
+  border-radius: 999px;
+  background: #e5f6fa;
+  color: #087c99;
+  font-weight: 800;
+}
+
+.selector-sabores {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 7px 0;
+}
+
+.boton-sabor {
+  padding: 5px 8px;
+  border: 1px solid rgba(23, 59, 99, 0.20);
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--azul);
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.boton-sabor[aria-pressed="true"] {
+  border-color: var(--azul);
+  background: var(--azul);
+  color: #ffffff;
+}
+
+.etiquetas-peso {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+.etiqueta-peso {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 48px;
+  padding: 6px 9px;
+  border: 1px solid rgba(23, 59, 99, 0.12);
+  border-radius: 8px;
+  background: #edf5fb;
+  color: var(--azul);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.mensaje-error {
+  padding: 14px;
+  border: 1px solid #d99;
+  border-radius: 10px;
+  color: #8b2020;
+}
+
+/* ========================================
+   PRODUCTOS - TABLET
+======================================== */
+
+@media (min-width: 700px) {
+  .productos {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .contenedor-imagen-producto {
+    height: 220px;
+  }
+}
+
+/* ========================================
+   PRODUCTOS - DESKTOP
+======================================== */
+
+@media (min-width: 1000px) {
+  .productos {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* ========================================
+   FILTROS DE PRODUCTOS
+======================================== */
+
+.panel-filtros {
+  margin: 18px 0 24px;
+  padding: 18px;
+
+  border: 1px solid rgba(23, 59, 99, 0.18);
+  border-radius: 18px;
+
+  background: rgba(255, 255, 255, 0.94);
+
+  box-shadow: 0 8px 24px rgba(23, 59, 99, 0.09);
+}
+
+.panel-filtros h3 {
+  margin: 0 0 16px;
+  color: var(--azul);
+  font-size: 1.05rem;
+}
+
+.grupo-filtro select {
+  width: 100%;
+  min-height: 46px;
+
+  padding: 10px 12px;
+
+  border: 1px solid rgba(23, 59, 99, 0.22);
+  border-radius: 10px;
+
+  background: #ffffff;
+  color: var(--texto);
+
+  font: inherit;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.grupo-filtro select:focus {
+  border-color: var(--azul);
+  box-shadow: 0 0 0 3px rgba(23, 59, 99, 0.10);
+}
+
+.cuadricula-filtros {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+.grupo-filtro {
+  display: grid;
+  gap: 7px;
+}
+
+.grupo-filtro label {
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.grupo-filtro select {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid var(--borde);
+  border-radius: 9px;
+  background: var(--blanco);
+  color: var(--texto);
+  font: inherit;
+}
+
+.grupo-filtro select:focus-visible,
+.boton-limpiar:focus-visible {
+  outline: 3px solid #75a9e5;
+  outline-offset: 3px;
+}
+
+.boton-limpiar {
+  margin-top: 16px;
+  padding: 10px 14px;
+  border: 1px solid var(--azul);
+  border-radius: 9px;
+  background: var(--blanco);
+  color: var(--azul);
+  font-weight: 700;
+}
+
+.boton-limpiar:hover {
+  background: var(--azul);
+  color: var(--blanco);
+}
+
+@media (min-width: 700px) {
+  .cuadricula-filtros {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+/* ========================================
+   CATEGORÍAS PRINCIPALES
+   La imagen constituye el card completo.
+======================================== */
+
+.tarjeta-categoria {
+  display: block;
+
+  width: 100%;
+  min-height: 0;
+
+  padding: 0;
+  margin: 0;
+
+  border: 0;
+  border-radius: 18px;
+
+  background: transparent;
+
+  overflow: hidden;
+  line-height: 0;
+
+  box-shadow:
+    0 8px 22px rgba(23, 59, 99, 0.10);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+/* Evita que el hover general de
+   .tarjeta-navegacion agregue fondo
+   o borde a las categorías. */
+
+.tarjeta-navegacion.tarjeta-categoria:hover {
+  border: 0;
+  background: transparent;
+
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 10px 24px rgba(23, 59, 99, 0.18);
+}
+
+.imagen-categoria {
+  display: block;
+
+  width: 100%;
+  max-width: none;
+
+  height: auto;
+
+  margin: 0;
+
+  object-fit: contain;
+
+  pointer-events: none;
+}
+
+/* Focus accesible sin deformar la imagen */
+
+.tarjeta-categoria:focus-visible {
+  outline: 3px solid #75a9e5;
+  outline-offset: 4px;
+}
+
+/* ========================================
+   HEADER / PORTADA
+======================================== */
+
+.encabezado {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+
+  overflow: hidden;
+
+  background: #082f52;
+}
+
+.portada-picture {
+  display: block;
+  width: 100%;
+}
+
+.imagen-portada {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  margin: 0;
+}
+
+/* ========================================
+   DECORACIÓN DEL FONDO
+======================================== */
+
+main.contenedor {
+  position: relative;
+  isolation: isolate;
+}
+
+/* ========================================
+   FONDO GENERAL DEL CATÁLOGO
+======================================== */
+
+body {
+  background-color: #f2fbfd;
+  background-image:
+
+    /* Huellas celestes */
+    radial-gradient(ellipse 13px 17px at 22px 18px,
+      rgba(55, 156, 190, 0.16) 98%,
+      transparent 100%),
+
+    radial-gradient(ellipse 13px 17px at 53px 18px,
+      rgba(55, 156, 190, 0.16) 98%,
+      transparent 100%),
+
+    radial-gradient(ellipse 12px 16px at 12px 43px,
+      rgba(55, 156, 190, 0.16) 98%,
+      transparent 100%),
+
+    radial-gradient(ellipse 12px 16px at 63px 43px,
+      rgba(55, 156, 190, 0.16) 98%,
+      transparent 100%),
+
+    radial-gradient(ellipse 25px 22px at 37px 48px,
+      rgba(55, 156, 190, 0.16) 98%,
+      transparent 100%),
+
+    /* Fondo celeste/blanco */
+    linear-gradient(180deg,
+      #f9fdfe 0%,
+      #f1fafc 45%,
+      #eaf7fa 100%);
+
+  background-size:
+    190px 190px,
+    190px 190px,
+    190px 190px,
+    190px 190px,
+    190px 190px,
+    100% 100%;
+
+  background-position:
+    20px 25px,
+    20px 25px,
+    20px 25px,
+    20px 25px,
+    20px 25px,
+    0 0;
+
+  background-attachment: fixed;
+
+  min-height: 100vh;
+}
+
+/* =========================================================
+   JERARQUÍA VISUAL
+   INFORMACIÓN DE PRODUCTOS
+========================================================= */
+
+/* ---------------------------------------------------------
+   NOMBRE DEL PRODUCTO
+--------------------------------------------------------- */
+
+.tarjeta-producto .nombre-producto {
+  margin: 8px 0 13px;
+
+  color: #173b63;
+
+  font-size: 1rem;
+  font-weight: 800;
+
+  line-height: 1.22;
+
+  letter-spacing: -0.01em;
+
+  overflow-wrap: break-word;
+}
+
+/* ---------------------------------------------------------
+   SABOR
+--------------------------------------------------------- */
+
+.bloque-sabor {
+  display: flex;
+
+  align-items: baseline;
+
+  flex-wrap: wrap;
+
+  column-gap: 5px;
+  row-gap: 2px;
+
+  margin: 0 0 7px;
+}
+
+/* ---------------------------------------------------------
+   PROTEÍNA
+--------------------------------------------------------- */
+
+.bloque-proteina {
+  display: flex;
+
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 5px;
+
+  margin: 0 0 5px;
+}
+
+/* ---------------------------------------------------------
+   ETIQUETAS
+   Sabor:
+   Proteína:
+--------------------------------------------------------- */
+
+.etiqueta-info {
+  flex: 0 0 auto;
+
+  color: #637486;
+
+  font-size: 0.76rem;
+  font-weight: 700;
+
+  line-height: 1.35;
+}
+
+.etiqueta-info::after {
+  content: ":";
+}
+
+/* ---------------------------------------------------------
+   VALOR DEL SABOR
+--------------------------------------------------------- */
+
+.valor-sabor {
+  min-width: 0;
+
+  color: #243447;
+
+  font-size: 0.80rem;
+  font-weight: 600;
+
+  line-height: 1.35;
+
+  overflow-wrap: break-word;
+}
+
+/* ---------------------------------------------------------
+   VALOR DE PROTEÍNA
+--------------------------------------------------------- */
+
+.valor-proteina {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 2px 7px;
+
+  border-radius: 999px;
+
+  background: #dff5fa;
+
+  color: #087c9d;
+
+  font-size: 0.78rem;
+  font-weight: 800;
+
+  line-height: 1.2;
+}
+
+/* ---------------------------------------------------------
+   PRESENTACIONES
+--------------------------------------------------------- */
+
+.presentaciones-producto {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 6px;
+
+  margin-top: auto;
+
+  padding-top: 13px;
+}
+
+.presentaciones-producto .etiqueta-peso {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-height: 28px;
+
+  padding: 5px 9px;
+
+  border: 1px solid rgba(23, 59, 99, 0.14);
+
+  border-radius: 7px;
+
+  background: #edf3fa;
+
+  color: #173b63;
+
+  font-size: 0.73rem;
+  font-weight: 800;
+
+  line-height: 1;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 699px) {
+
+  /*
+     * Dejamos espacio suficiente entre
+     * imagen y nombre.
+     */
+
+  .tarjeta-producto .nombre-producto {
+    margin: 8px 0 12px;
+
+    font-size: 0.92rem;
+
+    line-height: 1.25;
+  }
+
+  /*
+     * En mobile Sabor y su contenido
+     * se organizan verticalmente.
+     *
+     * Sabor:
+     * Carne, pollo y vegetales
+     */
+
+  .bloque-sabor {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 2px;
+
+    margin-bottom: 9px;
+  }
+
+  /*
+     * Proteína puede permanecer horizontal
+     * porque ocupa poco espacio.
+     *
+     * Proteína: 26%
+     */
+
+  .bloque-proteina {
+    display: flex;
+
+    flex-direction: row;
+
+    align-items: center;
+
+    gap: 5px;
+
+    margin-bottom: 4px;
+  }
+
+  .etiqueta-info {
+    font-size: 0.70rem;
+
+    line-height: 1.25;
+  }
+
+  .valor-sabor {
+    font-size: 0.76rem;
+
+    font-weight: 600;
+
+    line-height: 1.30;
+  }
+
+  .valor-proteina {
+    padding: 2px 6px;
+
+    font-size: 0.73rem;
+  }
+
+  .presentaciones-producto {
+    padding-top: 11px;
+  }
+
+  .presentaciones-producto .etiqueta-peso {
+    min-height: 27px;
+
+    padding: 5px 8px;
+
+    font-size: 0.70rem;
+  }
+}
+
+/* =========================================================
+   ETAPA DE VIDA
+========================================================= */
+
+.bloque-etapa {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+
+  gap: 5px;
+
+  margin: 0 0 7px;
+}
+
+.valor-etapa {
+  color: #173b63;
+
+  font-size: 0.78rem;
+  font-weight: 700;
+
+  line-height: 1.35;
+}
+
+/* MOBILE */
+
+@media (max-width: 699px) {
+
+  .bloque-etapa {
+    gap: 4px;
+
+    margin-bottom: 7px;
+  }
+
+  .valor-etapa {
+    font-size: 0.74rem;
+  }
+}
+
+/* =========================================================
+   ETAPA 2
+   CONSULTA POR WHATSAPP
+========================================================= */
+
+/* =========================================================
+   CONSULTA POR WHATSAPP
+   SELECTOR FLOTANTE
+========================================================= */
+
+.bloque-consulta {
+  position: relative;
+  width: 100%;
+  margin-top: 14px;
+}
+
+/* BOTÓN PRINCIPAL */
+
+.boton-consultar {
+  width: 100%;
+  min-height: 38px;
+  padding: 8px 12px;
+
+  border: 0;
+  border-radius: 10px;
+
+  background: #173b63;
+  color: #ffffff;
+
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.boton-consultar:hover {
+  background: #1767b1;
+}
+
+.boton-consultar:active {
+  transform: scale(0.98);
+}
+
+/* SELECTOR FLOTANTE */
+
+.selector-local {
+  display: none;
+
+  position: absolute;
+  z-index: 50;
+
+  top: calc(100% + 7px);
+  left: 50%;
+
+  width: max-content;
+  min-width: 150px;
+  max-width: 190px;
+
+  padding: 10px;
+
+  transform: translateX(-50%);
+
+  border: 1px solid rgba(23, 59, 99, 0.18);
+  border-radius: 10px;
+
+  background: #ffffff;
+
+  box-shadow:
+    0 8px 20px rgba(23, 59, 99, 0.18);
+}
+
+.bloque-consulta.activo .selector-local {
+  display: block;
+}
+
+.texto-selector-local {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #637486;
+
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.3;
+
+  text-align: center;
+}
+
+.botones-locales {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+}
+
+.boton-local {
+  min-width: 0;
+  padding: 7px 7px;
+
+  border: 1px solid rgba(23, 59, 99, 0.18);
+  border-radius: 8px;
+
+  background: #edf3fa;
+  color: #173b63;
+
+  font-family: inherit;
+  font-size: 0.72rem;
+  font-weight: 800;
+
+  white-space: nowrap;
+  cursor: pointer;
+
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.boton-local:hover {
+  border-color: #1767b1;
+  background: #1767b1;
+  color: #ffffff;
+}
+
+.boton-consultar:focus-visible,
+.boton-local:focus-visible {
+  outline: 3px solid rgba(23, 103, 177, 0.22);
+  outline-offset: 2px;
+}
+
+@media (max-width: 699px) {
+
+  .bloque-consulta {
+    margin-top: 12px;
+  }
+
+  .boton-consultar {
+    min-height: 36px;
+    padding: 7px 8px;
+    font-size: 0.76rem;
+  }
+
+  .selector-local {
+    min-width: 145px;
+    max-width: 170px;
+    padding: 9px 7px;
+  }
+
+  .texto-selector-local {
+    font-size: 0.68rem;
+  }
+
+  .boton-local {
+    padding: 7px 4px;
+    font-size: 0.68rem;
+  }
+}
+
+/* =========================================================
+   ETAPA 4
+   FOOTER
+========================================================= */
+
+.footer-principal {
+  margin-top: 60px;
+
+  background:
+    linear-gradient(145deg,
+      #102f52,
+      #174f82);
+
+  color: #ffffff;
+}
+
+.footer-contenido {
+  width: min(1120px, calc(100% - 32px));
+
+  margin: 0 auto;
+
+  padding: 42px 0 22px;
+}
+
+/* =========================================================
+   IDENTIDAD
+========================================================= */
+
+.footer-identidad {
+  margin-bottom: 30px;
+
+  text-align: center;
+}
+
+.footer-titulo {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: clamp(1.35rem, 3vw, 1.9rem);
+  font-weight: 800;
+
+  line-height: 1.2;
+}
+
+.footer-subtitulo {
+  margin: 7px 0 0;
+
+  color: rgba(255, 255, 255, 0.76);
+
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* =========================================================
+   LOCALES
+========================================================= */
+
+.footer-locales {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 18px;
+}
+
+/* =========================================================
+   CARD DE LOCAL
+========================================================= */
+
+.footer-local {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 0;
+
+  padding: 22px;
+
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 18px;
+
+  background: rgba(255, 255, 255, 0.08);
+
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.10);
+}
+
+.footer-local-titulo {
+  margin: 0 0 20px;
+
+  color: #ffffff;
+
+  font-size: 1.1rem;
+  font-weight: 800;
+
+  text-align: center;
+}
+
+/* =========================================================
+   INFORMACIÓN
+========================================================= */
+
+.footer-dato {
+  display: grid;
+
+  grid-template-columns: 30px 1fr;
+
+  gap: 11px;
+
+  align-items: start;
+
+  margin-bottom: 17px;
+}
+
+.footer-icono {
+  width: 24px;
+  height: 24px;
+
+  margin-top: 2px;
+
+  fill: #ffffff;
+
+  opacity: 0.9;
+}
+
+.footer-etiqueta {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: rgba(255, 255, 255, 0.68);
+
+  font-size: 0.72rem;
+  font-weight: 700;
+
+  text-transform: uppercase;
+
+  letter-spacing: 0.05em;
+}
+
+.footer-dato p {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 0.86rem;
+  font-weight: 600;
+
+  line-height: 1.55;
+}
+
+/* =========================================================
+   BOTONES
+========================================================= */
+
+.footer-acciones {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 9px;
+
+  margin-top: auto;
+
+  padding-top: 7px;
+}
+
+.footer-boton {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-height: 40px;
+
+  padding: 9px 12px;
+
+  border-radius: 10px;
+
+  font-size: 0.78rem;
+  font-weight: 800;
+
+  line-height: 1.2;
+
+  text-align: center;
+  text-decoration: none;
+
+  transition:
+    transform 0.18s ease,
+    background-color 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.footer-boton:active {
+  transform: scale(0.98);
+}
+
+/* WHATSAPP */
+
+.footer-boton-whatsapp {
+  border: 1px solid rgba(255, 255, 255, 0.20);
+
+  background: #ffffff;
+
+  color: #173b63;
+}
+
+.footer-boton-whatsapp:hover {
+  background: #edf5fc;
+}
+
+/* GOOGLE MAPS */
+
+.footer-boton-mapa {
+  border: 1px solid rgba(255, 255, 255, 0.42);
+
+  background: transparent;
+
+  color: #ffffff;
+}
+
+.footer-boton-mapa:hover {
+  background: rgba(255, 255, 255, 0.10);
+
+  border-color: rgba(255, 255, 255, 0.70);
+}
+
+/* TECLADO */
+
+.footer-boton:focus-visible {
+  outline: 3px solid rgba(255, 255, 255, 0.38);
+
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   CIERRE
+========================================================= */
+
+.footer-cierre {
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin-top: 28px;
+
+  padding-top: 18px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.13);
+}
+
+.footer-cierre p {
+  margin: 0;
+
+  color: rgba(255, 255, 255, 0.62);
+
+  font-size: 0.72rem;
+
+  line-height: 1.4;
+}
+
+/* =========================================================
+   TABLET / MOBILE
+========================================================= */
+
+@media (max-width: 699px) {
+
+  .footer-principal {
+    margin-top: 42px;
+  }
+
+  .footer-contenido {
+    width: min(100% - 24px, 560px);
+
+    padding-top: 32px;
+  }
+
+  .footer-identidad {
+    margin-bottom: 24px;
+  }
+
+  .footer-titulo {
+    font-size: 1.3rem;
+  }
+
+  .footer-subtitulo {
+    font-size: 0.8rem;
+  }
+
+  /* UN LOCAL DEBAJO DEL OTRO */
+
+  .footer-locales {
+    grid-template-columns: 1fr;
+
+    gap: 13px;
+  }
+
+  .footer-local {
+    padding: 18px;
+
+    border-radius: 15px;
+  }
+
+  .footer-local-titulo {
+    margin-bottom: 17px;
+
+    font-size: 1rem;
+  }
+
+  .footer-dato {
+    grid-template-columns: 27px 1fr;
+
+    gap: 9px;
+
+    margin-bottom: 15px;
+  }
+
+  .footer-icono {
+    width: 21px;
+    height: 21px;
+  }
+
+  .footer-etiqueta {
+    font-size: 0.67rem;
+  }
+
+  .footer-dato p {
+    font-size: 0.8rem;
+  }
+
+  .footer-acciones {
+    gap: 7px;
+  }
+
+  .footer-boton {
+    min-height: 38px;
+
+    padding: 8px 7px;
+
+    font-size: 0.73rem;
+  }
+
+  .footer-cierre {
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 4px;
+
+    margin-top: 22px;
+
+    text-align: center;
+  }
+
+  .footer-cierre p {
+    font-size: 0.68rem;
+  }
+}
+
+/* =========================================================
+   FOOTER - CARDS COMPACTAS
+========================================================= */
+
+.footer-locales {
+  max-width: 920px;
+  margin: 0 auto;
+  gap: 14px;
+}
+
+.footer-local {
+  padding: 16px 18px;
+}
+
+/* TÍTULO */
+
+.footer-local-titulo {
+  margin: 0 0 10px;
+  padding-bottom: 10px;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+
+  text-align: center;
+}
+
+/* =========================================================
+   FILAS DE INFORMACIÓN
+========================================================= */
+
+.footer-dato {
+  display: grid;
+
+  grid-template-columns:
+    20px auto minmax(0, 1fr);
+
+  align-items: center;
+
+  column-gap: 8px;
+
+  margin: 0;
+  padding: 10px 0;
+}
+
+.footer-dato+.footer-dato {
+  border-top: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+/* ICONO */
+
+.footer-icono {
+  width: 18px;
+  height: 18px;
+
+  margin: 0;
+
+  fill: rgba(255, 255, 255, 0.9);
+}
+
+/* DIRECCIÓN / LUNES A SÁBADO */
+
+.footer-etiqueta {
+  display: inline;
+
+  margin: 0;
+
+  color: rgba(255, 255, 255, 0.66);
+
+  font-size: 0.64rem;
+  font-weight: 700;
+
+  line-height: 1.3;
+
+  letter-spacing: 0.04em;
+
+  white-space: nowrap;
+}
+
+/* INFORMACIÓN */
+
+.footer-dato p {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 0.75rem;
+  font-weight: 600;
+
+  line-height: 1.4;
+}
+
+/* =========================================================
+   BOTONES
+========================================================= */
+
+.footer-acciones {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 8px;
+
+  margin: 4px 0 0;
+
+  padding-top: 11px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.footer-boton {
+  min-height: 34px;
+
+  padding: 7px 8px;
+
+  font-size: 0.7rem;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 699px) {
+
+  .footer-locales {
+    max-width: 100%;
+  }
+
+  .footer-local {
+    padding: 15px 14px;
+  }
+
+  .footer-local-titulo {
+    margin-bottom: 5px;
+  }
+
+  .footer-dato {
+    /*
+         * Seguimos intentando mantener
+         * toda la información horizontal.
+         */
+
+    grid-template-columns:
+      19px auto minmax(0, 1fr);
+
+    column-gap: 7px;
+
+    padding: 10px 0;
+  }
+
+  .footer-icono {
+    width: 18px;
+    height: 18px;
+  }
+
+  .footer-etiqueta {
+    font-size: 0.61rem;
+  }
+
+  .footer-dato p {
+    font-size: 0.72rem;
+
+    line-height: 1.35;
+  }
+
+  .footer-acciones {
+    gap: 7px;
+
+    padding-top: 10px;
+  }
+
+  .footer-boton {
+    min-height: 34px;
+
+    font-size: 0.7rem;
+  }
+}
+
+/* =========================================================
+   BOTÓN VOLVER
+========================================================= */
+
+.boton-volver {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  min-height: 38px;
+
+  margin: 0 0 12px;
+
+  padding: 8px 14px;
+
+  border: 1px solid rgba(23, 59, 99, 0.18);
+  border-radius: 10px;
+
+  background: #ffffff;
+
+  color: #173b63;
+
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 3px 10px rgba(23, 59, 99, 0.07);
+
+  transition:
+    background-color 0.18s ease,
+    border-color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.boton-volver:hover {
+  background: #f2f7fb;
+
+  border-color:
+    rgba(23, 59, 99, 0.30);
+}
+
+.boton-volver:active {
+  transform: translateX(-2px);
+}
+
+.boton-volver:focus-visible {
+  outline: 3px solid rgba(23, 103, 177, 0.20);
+
+  outline-offset: 2px;
+}
+
+.boton-volver-flecha {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  font-size: 1.15rem;
+  font-weight: 700;
+
+  line-height: 1;
+}
+
+/* MUY IMPORTANTE:
+   permite que el atributo hidden realmente lo oculte */
+
+.boton-volver[hidden] {
+  display: none;
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 699px) {
+
+  .boton-volver {
+    min-height: 36px;
+
+    margin-bottom: 10px;
+
+    padding: 7px 11px;
+
+    border-radius: 9px;
+
+    font-size: 0.76rem;
+  }
+
+  .boton-volver-flecha {
+    font-size: 1.05rem;
+  }
+}
+
+/* =========================================================
+   CARDS DE MARCAS
+   INTEGRACIÓN CON LA IDENTIDAD DEL CATÁLOGO
+========================================================= */
+
+.tarjeta-marca {
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-width: 0;
+
+    aspect-ratio: 5 / 3;
+
+    padding: 12px;
+
+    overflow: hidden;
+
+    border: 1px solid rgba(23, 104, 178, 0.20);
+    border-radius: 17px;
+
+    /*
+     * El exterior ahora pertenece a la misma
+     * familia visual del fondo del catálogo.
+     */
+    background:
+        linear-gradient(
+            145deg,
+            rgba(213, 238, 247, 0.96) 0%,
+            rgba(229, 244, 250, 0.96) 48%,
+            rgba(207, 232, 244, 0.96) 100%
+        );
+
+    box-shadow:
+        0 6px 16px rgba(31, 58, 95, 0.10),
+        inset 0 1px 0 rgba(255, 255, 255, 0.65);
+
+    cursor: pointer;
+
+    transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        border-color 0.18s ease;
+}
+
+/* =========================================================
+   ACENTO SUPERIOR
+========================================================= */
+
+.tarjeta-marca::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 5px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #08abc8 0%,
+            #087fb7 50%,
+            #1768b2 100%
+        );
+}
+
+/* =========================================================
+   PEQUEÑO DETALLE VISUAL DE FONDO
+========================================================= */
+
+.tarjeta-marca::after {
+    content: "";
+
+    position: absolute;
+
+    width: 105px;
+    height: 105px;
+
+    right: -38px;
+    bottom: -48px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255, 255, 255, 0.23);
+
+    pointer-events: none;
+}
+
+/* =========================================================
+   ZONA DEL LOGO
+========================================================= */
+
+.contenedor-logo-marca {
+    position: relative;
+    z-index: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+
+    min-width: 0;
+
+    padding: 13px;
+
+    border: 1px solid rgba(31, 58, 95, 0.08);
+    border-radius: 12px;
+
+    /*
+     * No blanco puro.
+     * Permite que la card conserve el celeste exterior.
+     */
+    background:
+        rgba(255, 255, 255, 0.78);
+
+    box-shadow:
+        0 2px 7px rgba(31, 58, 95, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.90);
+}
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.logo-marca {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    max-width: 100%;
+    max-height: 100%;
+
+    object-fit: contain;
+    object-position: center;
+
+    transition:
+        transform 0.18s ease;
+}
+
+/* =========================================================
+   INTERACCIÓN DESKTOP
+========================================================= */
+
+.tarjeta-marca:hover {
+    transform: translateY(-3px);
+
+    border-color:
+        rgba(23, 104, 178, 0.38);
+
+    box-shadow:
+        0 11px 25px rgba(31, 58, 95, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.70);
+}
+
+.tarjeta-marca:hover .logo-marca {
+    transform: scale(1.035);
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 699px) {
+
+    .tarjeta-marca {
+        padding: 8px;
+
+        border-radius: 14px;
+    }
+
+    .tarjeta-marca::before {
+        height: 4px;
+    }
+
+    .tarjeta-marca::after {
+        width: 70px;
+        height: 70px;
+
+        right: -27px;
+        bottom: -32px;
+    }
+
+    .contenedor-logo-marca {
+        padding: 8px;
+
+        border-radius: 10px;
+    }
+
+    .tarjeta-marca:hover {
+        transform: none;
+    }
+
+    .tarjeta-marca:hover .logo-marca {
+        transform: none;
+    }
+}
+
+/* =========================================================
+   CARDS DE MARCAS - ESTADOS Y FALLBACK
+========================================================= */
+
+.tarjeta-marca:active {
+  transform: translateY(-1px);
+}
+
+.tarjeta-marca:focus-visible {
+  outline: 3px solid rgba(23, 104, 178, 0.20);
+  outline-offset: 3px;
+}
+
+.nombre-marca-fallback {
+  max-width: 90%;
+  color: #1f3a5f;
+  font-size: 0.9rem;
+  font-weight: 800;
+  line-height: 1.25;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.nombre-marca-fallback[hidden] {
+  display: none;
+}
+
+@media (max-width: 699px) {
+  .nombre-marca-fallback {
+    font-size: 0.78rem;
+  }
+}

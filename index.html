@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Catálogo | Forrajería R&A</title>
+
+    <link rel="stylesheet" href="./styles.css">
+    <script src="./app.js" defer></script>
+</head>
+
+<body>
+
+    <header class="encabezado">
+
+        <picture class="portada-picture">
+
+            <source media="(min-width: 768px)" srcset="./assets/portada/portada-desktop.png">
+
+            <img src="./assets/portada/portada-mobile.png" alt="Forrajería R&A - Catálogo de alimentos"
+                class="imagen-portada">
+
+        </picture>
+
+    </header>
+
+    <main class="contenedor">
+
+        <section class="busqueda">
+            <label for="buscador">Buscar productos</label>
+
+            <input id="buscador" type="search" placeholder="Nombre, marca, indicación o peso..." autocomplete="off">
+        </section>
+
+        <button id="boton-volver" class="boton-volver" type="button" hidden aria-label="Volver a la vista anterior">
+            <span class="boton-volver-flecha" aria-hidden="true">←</span>
+            <span>Volver</span>
+        </button>
+
+
+        <nav id="ruta" class="ruta" aria-label="Ruta de navegación"></nav>
+
+        <section id="vista-categorias" hidden>
+            <h2>¿Qué alimento buscás?</h2>
+
+            <div id="categorias" class="cuadricula-categorias"></div>
+        </section>
+
+        <section id="vista-marcas" hidden>
+            <h2 id="titulo-marcas">Marcas disponibles</h2>
+
+            <div id="marcas" class="cuadricula-marcas"></div>
+        </section>
+
+
+        <section id="vista-productos" hidden>
+            <h2 id="titulo-productos">Productos</h2>
+
+            <div id="panel-filtros" class="panel-filtros" hidden>
+                <h3>Filtrar alimentos</h3>
+
+                <div class="cuadricula-filtros">
+                    <div id="grupo-etapa" class="grupo-filtro" hidden>
+                        <label for="filtro-etapa">Etapa de vida</label>
+
+                        <select id="filtro-etapa">
+                            <option value="">Todas las etapas</option>
+                        </select>
+                    </div>
+
+                    <div id="grupo-tipo" class="grupo-filtro" hidden>
+                        <label for="filtro-tipo">Tipo de alimento</label>
+
+                        <select id="filtro-tipo">
+                            <option value="">Todos los tipos</option>
+                        </select>
+                    </div>
+
+                    <div id="grupo-indicacion" class="grupo-filtro" hidden>
+                        <label for="filtro-indicacion">Indicación</label>
+
+                        <select id="filtro-indicacion">
+                            <option value="">Todas las indicaciones</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button id="limpiar-filtros" class="boton-limpiar" type="button" hidden>
+                    Limpiar filtros
+                </button>
+            </div>
+
+            <p id="estado" role="status" aria-live="polite"></p>
+
+            <div id="productos" class="productos"></div>
+        </section>
+
+        <p id="mensaje-error" class="mensaje-error" role="alert" hidden></p>
+
+    </main>
+
+</body>
+
+<footer class="footer-principal">
+
+    <div class="footer-contenido">
+
+        <!-- =================================================
+             IDENTIDAD
+        ================================================== -->
+
+        <div class="footer-identidad">
+
+            <h2 class="footer-titulo">
+                Productos Regionales R & A
+            </h2>
+
+            <p class="footer-subtitulo">
+                Forrajería · Alimentos para mascotas
+            </p>
+
+        </div>
+
+
+        <!-- =================================================
+             LOCALES
+        ================================================== -->
+
+        <div class="footer-locales">
+
+
+            <!-- =============================================
+                 LOCAL 1
+            ============================================== -->
+
+            <article class="footer-local">
+
+                <h3 class="footer-local-titulo">
+                    Local 1
+                </h3>
+
+
+                <!-- DIRECCIÓN -->
+
+                <div class="footer-dato">
+
+                    <svg class="footer-icono" viewBox="0 0 24 24" aria-hidden="true">
+                        <path
+                            d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z" />
+                    </svg>
+
+                    <div>
+                        <span class="footer-etiqueta">
+                            Dirección
+                        </span>
+
+                        <p>
+                            Av. 1 2275 e/ 78 y 79 · La Plata, Buenos Aires
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <!-- HORARIO -->
+
+                <div class="footer-dato">
+
+                    <svg class="footer-icono" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 2a10 10 0 1 0 10 10A10.01 10.01 0 0 0 12 2zm1 11h5v-2h-4V6h-2v7z" />
+                    </svg>
+
+                    <div>
+
+                        <span class="footer-etiqueta">
+                            Lunes a sábado
+                        </span>
+
+                        <p>
+                            09:00 a 13:00 · 16:00 a 20:00
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ACCIONES -->
+
+                <div class="footer-acciones">
+
+                    <a class="footer-boton footer-boton-whatsapp"
+                        href="https://wa.me/5492214182251?text=Hola%2C%20quisiera%20realizar%20una%20consulta."
+                        target="_blank" rel="noopener noreferrer">
+                        WhatsApp
+                    </a>
+
+                    <a class="footer-boton footer-boton-mapa"
+                        href="https://www.google.com/maps/place/Forrajer%C3%ADa+R+y+A/@-34.9304401,-57.9152367,17z/data=!3m1!4b1!4m6!3m5!1s0x95a2ef4d24a5ca17:0xf943bb9549dfe837!8m2!3d-34.9304401!4d-57.9152367!16s%2Fg%2F11ckqqsb0p?hl=es&amp;entry=ttu"
+                        target="_blank" rel="noopener noreferrer">
+                        Cómo llegar
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- =============================================
+                 LOCAL 122
+            ============================================== -->
+
+            <article class="footer-local">
+
+                <h3 class="footer-local-titulo">
+                    Local 122
+                </h3>
+
+
+                <!-- DIRECCIÓN -->
+
+                <div class="footer-dato">
+
+                    <svg class="footer-icono" viewBox="0 0 24 24" aria-hidden="true">
+                        <path
+                            d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z" />
+                    </svg>
+
+                    <div>
+
+                        <span class="footer-etiqueta">
+                            Dirección
+                        </span>
+
+                        <p>
+                            Av. 122 1709 e/ 67 y 68 · La Plata, Buenos Aires
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- HORARIO -->
+
+                <div class="footer-dato">
+
+                    <svg class="footer-icono" viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="M12 2a10 10 0 1 0 10 10A10.01 10.01 0 0 0 12 2zm1 11h5v-2h-4V6h-2v7z" />
+                    </svg>
+
+                    <div>
+
+                        <span class="footer-etiqueta">
+                            Lunes a sábado
+                        </span>
+
+                        <p>
+                            09:00 a 13:00 · 16:30 a 20:30
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ACCIONES -->
+
+                <div class="footer-acciones">
+
+                    <a class="footer-boton footer-boton-whatsapp"
+                        href="https://wa.me/5492215934569?text=Hola%2C%20quisiera%20realizar%20una%20consulta."
+                        target="_blank" rel="noopener noreferrer">
+                        WhatsApp
+                    </a>
+
+                    <a class="footer-boton footer-boton-mapa"
+                        href="https://www.google.com/maps/place/Tienda+de+mascotas+RYA/@-34.9136159,-57.9187297,17z/data=!3m1!4b1!4m6!3m5!1s0x95a2e6074a98e6a1:0xc5638bc8db9de64f!8m2!3d-34.9136159!4d-57.9187297!16s%2Fg%2F11bvv_4frf?hl=es&amp;entry=ttu"
+                        target="_blank" rel="noopener noreferrer">
+                        Cómo llegar
+                    </a>
+
+                </div>
+
+            </article>
+
+        </div>
+
+
+        <!-- =================================================
+             CIERRE
+        ================================================== -->
+
+        <div class="footer-cierre">
+
+            <p>
+                © 2026 Productos Regionales R & A
+            </p>
+
+            <p>
+                Todos los derechos reservados.
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+</html>
